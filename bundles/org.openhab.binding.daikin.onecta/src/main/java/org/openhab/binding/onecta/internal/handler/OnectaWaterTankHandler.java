@@ -72,6 +72,11 @@ public class OnectaWaterTankHandler extends BaseThingHandler {
                         dataTransService.setPowerOnOff(Enums.OnOff.valueOf(command.toString()));
                     }
                     break;
+                case CHANNEL_HWT_POWERFUL_MODE:
+                    if (command instanceof OnOffType) {
+                        dataTransService.setPowerFulModeOnOff(Enums.OnOff.valueOf(command.toString()));
+                    }
+                    break;
             }
 
             updateStatus(ThingStatus.ONLINE);
