@@ -38,6 +38,10 @@ public class DataTransportService {
         return unit.findManagementPointsByType(managementPoint.getValue());
     }
 
+    public String getEmbeddedId() {
+        return getManagementPoint(this.managementPointType).getEmbeddedId();
+    }
+
     public Enums.OperationMode getCurrentOperationMode() {
         return Enums.OperationMode
                 .fromValue(getManagementPoint(this.managementPointType).getOperationMode().getValue());
@@ -154,7 +158,7 @@ public class DataTransportService {
     }
 
     public void setPowerOnOff(Enums.OnOff value) {
-        OnectaConnectionClient.setPowerOnOff(unitId, managementPointType, value);
+        OnectaConnectionClient.setPowerOnOffTest(unitId, getEmbeddedId(), value);
     }
 
     public void setPowerFulModeOnOff(Enums.OnOff value) {

@@ -42,8 +42,6 @@ public class OnectaConnectionClient {
         return onectaData;
     }
 
-    // private static HttpClient httpClient;
-
     private static OnectaSignInClient onectaSignInClient;
 
     public static void SetConnectionClient(HttpClientFactory httpClientFactory) {
@@ -179,6 +177,12 @@ public class OnectaConnectionClient {
         }
 
         return new JsonObject();
+    }
+
+    public static void setPowerOnOffTest(String unitId, String managementPointType, Enums.OnOff value) {
+        logger.debug(String.format("setPowerOnOff : %s, %s, %s", unitId, managementPointType, value));
+        CommandOnOf commandOnOf = new CommandOnOf(value);
+        doBearerRequestPatch(getUrlOnOffTest(unitId, managementPointType), commandOnOf);
     }
 
     public static void setPowerOnOff(String unitId, Enums.ManagementPoint managementPointType, Enums.OnOff value) {
