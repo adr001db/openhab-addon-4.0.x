@@ -114,16 +114,16 @@ public class OnectaIndoorUnitHandler extends BaseThingHandler {
         if (dataTransService.isAvailable()) {
 
             // getThing().setLabel(String.format("Daikin Onecta Unit (%s)", dataTransService.getUnitName()));
-            getThing().setProperty(PROPERTY_IDU_NAME, dataTransService.getUnitName());
+            getThing().setProperty(PROPERTY_IDU_NAME, dataTransService.getModelInfo());
 
             updateState(CHANNEL_IDU_MODELINFO, getModelInfo());
             updateState(CHANNEL_IDU_SOFTWAREVERSION, getSoftwareVerion());
-            updateState(CHANNEL_IDU_EEPROMVERSION, getIsInEmergencyState());
-            updateState(CHANNEL_IDU_ISKEEPDRY, getIsInErrorState());
-            updateState(CHANNEL_IDU_FANSPEED, getIsInInstallerState());
-            updateState(CHANNEL_IDU_HEATEXCHANGETEMP, getIsInWarningState());
-
-            updateState(CHANNEL_IDU_SUCTIONTEMP, getIsHolidayModeActive());
+            updateState(CHANNEL_IDU_EEPROMVERSION, getEepromVerion());
+            updateState(CHANNEL_IDU_ISKEEPDRY, getDryKeepSetting());
+            updateState(CHANNEL_IDU_FANSPEED, getFanMotorRotationSpeed());
+            updateState(CHANNEL_IDU_DELTAD, getDeltaD());
+            updateState(CHANNEL_IDU_HEATEXCHANGETEMP, getHeatExchangerTemperature());
+            updateState(CHANNEL_IDU_SUCTIONTEMP, getSuctionTemperature());
 
         } else {
             getThing().setProperty(PROPERTY_IDU_NAME, "Unit not registered at Onecta, unitID does not exists.");
@@ -132,7 +132,7 @@ public class OnectaIndoorUnitHandler extends BaseThingHandler {
 
     private State getModelInfo() {
         try {
-            return new StringType(this.dataTransService.getErrorCode());
+            return new StringType(this.dataTransService.getModelInfo());
         } catch (Exception e) {
             return UnDefType.UNDEF;
         }
@@ -140,199 +140,55 @@ public class OnectaIndoorUnitHandler extends BaseThingHandler {
 
     private State getSoftwareVerion() {
         try {
-            return new StringType(dataTransService.getCurrentOperationMode().toString());
+            return new StringType(dataTransService.getSoftwareVersion());
         } catch (Exception e) {
             return UnDefType.UNDEF;
         }
     }
 
-    private State getSetpointMode() {
+    private State getEepromVerion() {
         try {
-            return new StringType(dataTransService.getSetpointMode().toString());
+            return new StringType(dataTransService.getEepromVerion());
         } catch (Exception e) {
             return UnDefType.UNDEF;
         }
     }
 
-    private State getIsHolidayModeActive() {
+    private State getDryKeepSetting() {
         try {
-            return OnOffType.from(dataTransService.getIsHolidayModeActive());
+            return OnOffType.from(dataTransService.getDryKeepSetting());
         } catch (Exception e) {
             return UnDefType.UNDEF;
         }
     }
 
-    private State getIsPowerfulModeActive() {
+    private State getFanMotorRotationSpeed() {
         try {
-            return OnOffType.from(dataTransService.getIsPowerfulModeActive());
+            return new DecimalType(dataTransService.getFanMotorRotationSpeed());
         } catch (Exception e) {
             return UnDefType.UNDEF;
         }
     }
 
-    private State getTankTemperatur() {
+    private State getDeltaD() {
         try {
-            return new DecimalType(dataTransService.getTankTemperature());
+            return new DecimalType(dataTransService.getDeltaD());
         } catch (Exception e) {
             return UnDefType.UNDEF;
         }
     }
 
-    private State getDaylightSavingTimeEnabled() {
+    private State getHeatExchangerTemperature() {
         try {
-            return OnOffType.from(this.dataTransService.getDaylightSavingTimeEnabled());
+            return new DecimalType(dataTransService.getHeatExchangerTemperature());
         } catch (Exception e) {
             return UnDefType.UNDEF;
         }
     }
 
-    private State getFirmwareVerion() {
+    private State getSuctionTemperature() {
         try {
-            return new StringType(this.dataTransService.getFirmwareVerion());
-        } catch (Exception e) {
-            return UnDefType.UNDEF;
-        }
-    }
-
-    private State getHeatupMode() {
-        try {
-            return new StringType(this.dataTransService.getHeatupMode().toString());
-        } catch (Exception e) {
-            return UnDefType.UNDEF;
-        }
-    }
-
-    private State getIsInErrorState() {
-        try {
-            return OnOffType.from(this.dataTransService.getIsInErrorState());
-        } catch (Exception e) {
-            return UnDefType.UNDEF;
-        }
-    }
-
-    private State getErrorState() {
-        try {
-            return new StringType(this.dataTransService.getErrorCode());
-        } catch (Exception e) {
-            return UnDefType.UNDEF;
-        }
-    }
-
-    private State getIsInEmergencyState() {
-        try {
-            return OnOffType.from(this.dataTransService.getIsInEmergencyState());
-        } catch (Exception e) {
-            return UnDefType.UNDEF;
-        }
-    }
-
-    private State getIsInInstallerState() {
-        try {
-            return OnOffType.from(this.dataTransService.getIsInInstallerState());
-        } catch (Exception e) {
-            return UnDefType.UNDEF;
-        }
-    }
-
-    private State getIsInWarningState() {
-        try {
-            return OnOffType.from(this.dataTransService.getIsInWarningState());
-        } catch (Exception e) {
-            return UnDefType.UNDEF;
-        }
-    }
-
-    private State getPowerFulMode() {
-        try {
-            return OnOffType.from(this.dataTransService.getPowerFulModeOnOff());
-        } catch (Exception e) {
-            return UnDefType.UNDEF;
-        }
-    }
-
-    private State getCurrentTankTemperatureSet() {
-        try {
-            return new DecimalType(dataTransService.getCurrentTankTemperatureSet());
-        } catch (Exception e) {
-            return UnDefType.UNDEF;
-        }
-    }
-
-    private State getCurrentTankTemperatureSetMin() {
-        try {
-            return new DecimalType(dataTransService.getCurrentTankTemperatureSetMin());
-        } catch (Exception e) {
-            return UnDefType.UNDEF;
-        }
-    }
-
-    private State getCurrentTankTemperatureSetMax() {
-        try {
-            return new DecimalType(dataTransService.getCurrentTankTemperatureSetMax());
-        } catch (Exception e) {
-            return UnDefType.UNDEF;
-        }
-    }
-
-    private State getCurrentTankTemperatureSetStep() {
-        try {
-            return new DecimalType(dataTransService.getCurrentTankTemperatureSetStep());
-        } catch (Exception e) {
-            return UnDefType.UNDEF;
-        }
-    }
-
-    private State getOperationMode() {
-        try {
-            return new StringType(dataTransService.getCurrentOperationMode().toString());
-        } catch (Exception e) {
-            return UnDefType.UNDEF;
-        }
-    }
-
-    private State getRegionCode() {
-        try {
-            return new StringType(this.dataTransService.getRegionCode());
-        } catch (Exception e) {
-            return UnDefType.UNDEF;
-        }
-    }
-
-    private State getSerialNumber() {
-        try {
-            return new StringType(this.dataTransService.getSerialNumber());
-        } catch (Exception e) {
-            return UnDefType.UNDEF;
-        }
-    }
-
-    private State getSsid() {
-        try {
-            return new StringType(this.dataTransService.getSsid());
-        } catch (Exception e) {
-            return UnDefType.UNDEF;
-        }
-    }
-
-    private State getTimeZone() {
-        try {
-            return new StringType(this.dataTransService.getTimeZone());
-        } catch (Exception e) {
-            return UnDefType.UNDEF;
-        }
-    }
-
-    private State getWifiConnectionSsid() {
-        try {
-            return new StringType(this.dataTransService.getWifiConectionSSid());
-        } catch (Exception e) {
-            return UnDefType.UNDEF;
-        }
-    }
-
-    private State getWifiConnectionStrength() {
-        try {
-            return new DecimalType(this.dataTransService.getWifiConectionStrength());
+            return new DecimalType(dataTransService.getSuctionTemperature());
         } catch (Exception e) {
             return UnDefType.UNDEF;
         }

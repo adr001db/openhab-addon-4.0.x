@@ -50,7 +50,7 @@ import org.osgi.service.component.annotations.Reference;
 public class OnectaBridgeHandlerFactory extends BaseThingHandlerFactory {
 
     private static final Set<ThingTypeUID> SUPPORTED_THING_TYPES_UIDS = Set.of(BRIDGE_THING_TYPE, DEVICE_THING_TYPE,
-            GATEWAY_THING_TYPE, WATERTANK_THING_TYPE);
+            GATEWAY_THING_TYPE, WATERTANK_THING_TYPE, INDOORUNIT_THING_TYPE);
     private HttpClientFactory httpClientFactory;
     private final TimeZoneProvider timeZoneProvider;
 

@@ -4,7 +4,7 @@
 	xmlns:thing="https://openhab.org/schemas/thing-description/v1.0.0"
 	xsi:schemaLocation="https://openhab.org/schemas/thing-description/v1.0.0 https://openhab.org/schemas/thing-description-1.0.0.xsd">
 
-	<thing-type id="domesticHotWaterTank">
+	<thing-type id="indoorUnit">
 		<supported-bridge-type-refs>
 			<bridge-type-ref id="account"/>
 		</supported-bridge-type-refs>
@@ -39,15 +39,10 @@
 			<channel id="eepromversion" typeId="idu-eepromversion"/>
 			<channel id="isdrykeepsetting" typeId="idu-drykeepsetting"/>
 
-
 			<channel id="deltadvalue" typeId="idu-deltadvalue"/>
-			<channel id="deltadunit" typeId="idu-deltadunit"/>
 			<channel id="fanmotorratationspeed" typeId="idu-fanmotorratationspeed"/>
-			<channel id="fanmotorratationspeedunit" typeId="idu-fanmotorratationspeedunit"/>
 			<channel id="heatexchangertemp" typeId="idu-heatexchangertemp"/>
-			<channel id="heatexchangerunit" typeId="idu-heatexchangerunit"/>
 			<channel id="suctiontemp" typeId="idu-suctiontemp"/>
-			<channel id="suctiontempunit" typeId="idu-suctiontempunit"/>
 		</channels>
 	</channel-group-type>
 
@@ -87,8 +82,8 @@
 		<item-type>Number:Frequency</item-type>
 		<label>Fanmotor rotation speed</label>
 		<description>Fanmotor rotation speed</description>
-		<category>Temperature</category>
-		<state readOnly="true" pattern="%.1f %unit%"/>
+		<category>fan</category>
+		<state readOnly="true" pattern="%.1f RPM"/>
 	</channel-type>
 
 	<channel-type id="idu-heatexchangertemp">
