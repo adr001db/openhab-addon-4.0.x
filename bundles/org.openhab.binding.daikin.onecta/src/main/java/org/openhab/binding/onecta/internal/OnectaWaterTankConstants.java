@@ -15,13 +15,13 @@ package org.openhab.binding.onecta.internal;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 
 /**
- * The {@link OnectaWaterTankConstant} class defines common constants, which are
+ * The {@link OnectaWaterTankConstants} class defines common constants, which are
  * used across the whole binding.
  *
  * @author Alexander Drent - Initial contribution
  */
 @NonNullByDefault
-public class OnectaWaterTankConstant {
+public class OnectaWaterTankConstants {
 
     // List of all Channel ids
 
