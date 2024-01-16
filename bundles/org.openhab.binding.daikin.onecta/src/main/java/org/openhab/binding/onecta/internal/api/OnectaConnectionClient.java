@@ -109,7 +109,7 @@ public class OnectaConnectionClient {
 
             if (response.getStatus() == HttpStatus.UNAUTHORIZED_401 && !refreshed) {
                 onectaSignInClient.fetchAccessToken();
-                doBearerRequestPatch(url, body, true);
+                response = doBearerRequestPatch(url, body, true);
             }
             return response;
         } catch (Exception e) {
@@ -117,7 +117,7 @@ public class OnectaConnectionClient {
                 try {
                     logger.debug(String.format("Get new token"));
                     onectaSignInClient.fetchAccessToken();
-                    response = doBearerRequestGet(true);
+                    response = doBearerRequestPatch(url, body, true);
                 } catch (DaikinCommunicationException ex) {
                     throw new RuntimeException(ex);
                 }

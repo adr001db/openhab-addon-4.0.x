@@ -24,7 +24,7 @@
 			<parameter name="refreshInterval" type="integer" unit="s" min="5">
 				<label>Refresh Interval.</label>
 				<description>Interval the device is polled in seconds.</description>
-				<default>60</default>
+				<default>10</default>
 			</parameter>
 			<parameter name="rawdataLogging" type="boolean">
 				<label>Drop Raw-data</label>
