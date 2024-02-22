@@ -16,11 +16,17 @@ Older units can also be controlled with this binding as long as they are registe
 
 Basically all devices connected to Daikin Onecta cloud could be connected with the binding.
 
-- `bridge`: Ensures the connection to Onecta cloud and the recognition of connected units
+- `bridge (Daikin Onecta Account)`: Ensures the connection to Onecta cloud and the recognition of connected units
 
 ## Discovery
 
-Once the bridge is connected to Daikin Onecta it will receive all data from the connected units. The available units will appear in the inbox. From here they can be added as a new thing
+Once the bridge is connected to Daikin Onecta it will receive all data from the connected units. 
+The available units will appear in the inbox. From here they can be added as a new thing.</br>
+Discoverable things are:
+- Daikin Onecta Unit(...)<br>Is the thing to control the unit.
+- Daikin Onecta (Gateway)<br>Is the thing for info about the network controler.
+- Daikin Onecta (IndoorUnit)<br>Is the thing for info about te indoor unit.
+- Daikin Onecta (DomesticHotWaterTank)<br> Is the thing to control the Hot water tank.
 
 ## Binding Configuration
 
